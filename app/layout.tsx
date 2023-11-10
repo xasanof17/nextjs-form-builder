@@ -5,6 +5,7 @@ import { Inter as FontSans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { Navbar } from "@/layouts";
+import { Toaster } from "@/components/ui/toaster";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -35,6 +36,7 @@ export default function RootLayout({
               <Navbar />
               <main className="flex w-full flex-grow">{children}</main>
             </div>
+            <Toaster />
           </ThemeProvider>
         </body>
       </html>

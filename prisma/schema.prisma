@@ -10,7 +10,7 @@ datasource db {
 
 model Form {
   id          Int      @id @default(autoincrement())
-  usedId      String
+  userId      String
   createdAt   DateTime @default(now())
   published   Boolean  @default(false)
   name        String
@@ -22,6 +22,8 @@ model Form {
 
   shareURL        String            @default(uuid())
   FormSubmissions FormSubmissions[]
+
+  @@unique([name, userId])
 }
 
 model FormSubmissions {
