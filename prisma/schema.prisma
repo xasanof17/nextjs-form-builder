@@ -10,17 +10,16 @@ datasource db {
 
 model Form {
   id          Int      @id @default(autoincrement())
-  userId      String
-  createdAt   DateTime @default(now())
+  userId      String   @db.Text
+  createdAt   DateTime @default(now()) @db.Timestamp(3)
   published   Boolean  @default(false)
   name        String
   description String   @default("")
   content     String   @default("[]")
+  visits      Int      @default(0)
+  submissions Int      @default(0)
+  shareURL    String   @default(uuid())
 
-  visits      Int @default(0)
-  submissions Int @default(0)
-
-  shareURL        String            @default(uuid())
   FormSubmissions FormSubmissions[]
 
   @@unique([name, userId])
@@ -28,8 +27,10 @@ model Form {
 
 model FormSubmissions {
   id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @db.Timestamp(3)
   formId    Int
-  form      Form     @relation(fields: [formId], references: [id])
-  content   String
+
+  form Form @relation(fields: [formId], references: [id])
+
+  content String
 }
